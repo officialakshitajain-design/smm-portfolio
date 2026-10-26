@@ -145,6 +145,22 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px
 .doc span{color:var(--muted);font-size:14px}
 .doc a{margin-top:auto;font-weight:700;font-size:14px;color:var(--coral);text-decoration:none}
 
+/* running now */
+.live{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px}
+.proj{position:relative;border:1.5px solid var(--line);border-radius:24px;padding:28px;background:var(--card);min-width:0;overflow:hidden;display:flex;flex-direction:column;gap:12px}
+.proj::after{content:"";position:absolute;width:220px;height:220px;right:-70px;top:-70px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--c) 40%,transparent),transparent 70%);pointer-events:none}
+.status{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--c)}
+.status i{width:9px;height:9px;border-radius:50%;background:var(--c);box-shadow:0 0 0 0 var(--c);animation:ping 1.8s ease-out infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--c) 70%,transparent)}100%{box-shadow:0 0 0 12px transparent}}
+.proj h3{font-size:28px;line-height:1.05}
+.proj .role{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.proj p{margin:0;color:var(--muted);font-size:15px}
+.proj ul{margin:0;padding-left:18px;font-size:15px;display:grid;gap:6px}
+.proj li::marker{color:var(--c)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-size:12px;font-family:var(--mono);padding:4px 9px;border-radius:999px;border:1px solid var(--line)}
+.proj .pill{align-self:flex-start;margin-top:auto}
+
 /* plan */
 .plan{position:relative;margin-top:44px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .plan::before{content:"";position:absolute;top:22px;left:0;right:0;height:3px;background:var(--line);border-radius:3px}
@@ -210,7 +226,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 <nav>
   <div class="wrap">
     <a class="logo" href="#top">akshita<span>.</span></a>
-    <div class="navlinks"><a href="#problem">The problem</a><a href="#why">Why me</a><a href="#proof">Proof</a><a href="#plan">30-day plan</a></div>
+    <div class="navlinks"><a href="#problem">The problem</a><a href="#why">Why me</a><a href="#proof">Proof</a><a href="#now">Running now</a><a href="#plan">30-day plan</a></div>
     <a class="pill" href="#ask">Let's talk</a>
   </div>
 </nav>
@@ -239,8 +255,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 
 <div class="marquee" aria-label="Brands I've worked with">
   <div class="track">
-    <span>Snapto.ai</span><span>Noor · @noors2cents</span><span>Tatsat Store</span><span>Rohan Gulati</span><span>Casper Corps</span><span>Bansal Sweets</span><span>Nutriganic</span><span>Jain Ki Dukaan</span>
-    <span aria-hidden="true">Snapto.ai</span><span aria-hidden="true">Noor · @noors2cents</span><span aria-hidden="true">Tatsat Store</span><span aria-hidden="true">Rohan Gulati</span><span aria-hidden="true">Casper Corps</span><span aria-hidden="true">Bansal Sweets</span><span aria-hidden="true">Nutriganic</span><span aria-hidden="true">Jain Ki Dukaan</span>
+    <span>aczy planners</span><span>Snapto.ai</span><span>Noor · @noors2cents</span><span>Tatsat Store</span><span>Rohan Gulati</span><span>Casper Corps</span><span>Bansal Sweets</span><span>Nutriganic</span><span>Jain Ki Dukaan</span>
+    <span aria-hidden="true">aczy planners</span><span aria-hidden="true">Snapto.ai</span><span aria-hidden="true">Noor · @noors2cents</span><span aria-hidden="true">Tatsat Store</span><span aria-hidden="true">Rohan Gulati</span><span aria-hidden="true">Casper Corps</span><span aria-hidden="true">Bansal Sweets</span><span aria-hidden="true">Nutriganic</span><span aria-hidden="true">Jain Ki Dukaan</span>
   </div>
 </div>
 
@@ -340,6 +356,41 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
       <div class="doc reveal"><b>Bansal Sweets: Diwali 2026 local growth plan</b><span>Local reach plan for a Delhi mithai shop, with AI reels made in Gemini and Kling.</span><a href="https://app.notion.com/p/Bansal-Sweets-Local-Social-Growth-Diwali-2026-Plan-3f7e1cca5b7c81ae8190e9316e84eb14" target="_blank" rel="noopener">Read the plan →</a></div>
       <div class="doc reveal"><b>Ankit Sonar × The CA Couple</b><span>Personal brand and growth strategy for a chartered-accountant creator duo.</span><a href="https://app.notion.com/p/Ankit-Sonar-The-CA-Couple-Personal-Brand-Growth-Strategy-3f2e1cca5b7c8109a8beedf0e426fa0b" target="_blank" rel="noopener">Read the strategy →</a></div>
       <div class="doc reveal"><b>Personal brand growth assignment</b><span>A social media manager brief worked end to end, audit to content plan.</span><a href="https://app.notion.com/p/Personal-Brand-Growth-l-Social-Media-Manager-Assignment-3cce1cca5b7c815284d5c1cef6e76f31" target="_blank" rel="noopener">Read the assignment →</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="now">
+  <div class="wrap">
+    <div class="eyebrow reveal">Running now</div>
+    <h2 class="reveal" style="margin-top:12px">Two projects I'm building right now.</h2>
+    <p class="lead reveal" style="margin-top:16px">Client work proves I can deliver. These two show what I do when the brand is mine to grow.</p>
+    <div class="live">
+      <article class="proj reveal" style="--c:var(--butter)">
+        <span class="status"><i></i>Live · own brand</span>
+        <h3>aczy planners</h3>
+        <div class="role">Founder · designer · marketer</div>
+        <p>My own digital planner brand: 9 clickable PDF planners (2027, Money, Exam, Small Business, Wedding, Fitness, Home, Job Hunt, Travel) for GoodNotes or A4 print, sold through Instagram DMs.</p>
+        <ul>
+          <li>Designed every planner and every creative myself in Adobe Express.</li>
+          <li>Running a 30-day Instagram push with AI reels made in Gemini, each in a different visual style.</li>
+          <li>Outreach matched to each product, like the Exam planner pitched to schools and coaching centres.</li>
+        </ul>
+        <div class="chips"><span>Product design</span><span>AI reels</span><span>DM sales</span><span>Outreach</span></div>
+        <a class="pill" href="https://www.instagram.com/aczy.in_planners/" target="_blank" rel="noopener">See @aczy.in_planners →</a>
+      </article>
+      <article class="proj reveal" style="--c:var(--lilac)">
+        <span class="status"><i></i>Ongoing · local business</span>
+        <h3>Jain Ki Dukaan</h3>
+        <div class="role">Website · content · social</div>
+        <p>A water pump shop taking a traditional, walk-in business online. I built the full website and run its content strategy and social media.</p>
+        <ul>
+          <li>Designed and built the complete website from scratch.</li>
+          <li>Content that explains products in plain language for local buyers.</li>
+          <li>Related industrial product marketing for Starshine Pumps.</li>
+        </ul>
+        <div class="chips"><span>Website build</span><span>Local SEO</span><span>Content strategy</span><span>SMM</span></div>
+      </article>
     </div>
   </div>
 </section>
