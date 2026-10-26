@@ -61,7 +61,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px
 .pill.ghost{background:transparent;color:var(--fg);border:1.5px solid var(--line)}
 
 /* hero */
-.hero{padding-block:64px 40px;position:relative}
+.hero{padding-block:64px 40px;position:relative;overflow-x:clip}
 .hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:48px;align-items:center}
 .hero h1{font-size:clamp(42px,7.4vw,96px);line-height:.95;font-weight:900}
 .hero h1 .w{display:inline-block;opacity:0;transform:translateY(40px) rotate(4deg);animation:rise .8s cubic-bezier(.2,.8,.2,1) forwards}
@@ -161,6 +161,61 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px
 .chips span{font-size:12px;font-family:var(--mono);padding:4px 9px;border-radius:999px;border:1px solid var(--line)}
 .proj .pill{align-self:flex-start;margin-top:auto}
 
+/* playable tiles */
+.tile{cursor:pointer;border:0;padding:0;font:inherit;color:inherit}
+.tile .play{position:absolute;top:8px;left:8px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;box-shadow:0 4px 12px rgba(0,0,0,.3);transition:transform .25s}
+.tile .play::after{content:"";border-left:10px solid #1B0E2B;border-top:6px solid transparent;border-bottom:6px solid transparent;margin-left:3px}
+.tile .play.stack::after{border:0;margin:0;width:12px;height:12px;border:2px solid #1B0E2B;border-radius:2px;box-shadow:3px -3px 0 -1px #fff,3px -3px 0 1px #1B0E2B}
+.tile:hover .play{transform:scale(1.15)}
+.hint{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:6px}
+.vids{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px;min-width:0}
+.vids .tile img{width:112px;height:200px}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:rgba(12,6,20,.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;transition:opacity .25s}
+.modal.open{opacity:1}
+.modal[hidden]{display:none}
+.mbox{position:relative;width:min(440px,100%);max-height:100%;display:flex;flex-direction:column;gap:10px;transform:translateY(20px) scale(.97);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.modal.open .mbox{transform:none}
+.mstage{position:relative;border-radius:18px;overflow:hidden;background:#fff;min-height:200px;max-height:calc(100vh - 120px);display:flex;align-items:center;justify-content:center}
+.mstage iframe{width:100%;height:min(720px,calc(100vh - 130px));border:0;display:block;background:#fff}
+.mstage video{width:100%;max-height:calc(100vh - 130px);display:block;background:#000}
+.mstage img{width:100%;max-height:calc(100vh - 130px);object-fit:contain;background:#111;display:block}
+.mbar{display:flex;justify-content:space-between;align-items:center;gap:10px;color:#fff;font-family:var(--mono);font-size:13px}
+.mbar a{color:#fff}
+.mbtn{width:42px;height:42px;border-radius:50%;border:0;background:#fff;color:#1B0E2B;font:700 18px var(--body);cursor:pointer;display:grid;place-items:center}
+.mnav{position:absolute;top:50%;transform:translateY(-50%);z-index:2}
+.mnav.prev{left:8px}.mnav.next{right:8px}
+.mclose{position:absolute;top:-6px;right:-6px;z-index:3}
+.dots{display:flex;gap:5px;justify-content:center;flex-wrap:wrap}
+.dots i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35)}
+.dots i.on{background:#fff}
+
+/* calendars */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px}
+.tabs button{font:600 14px var(--body);padding:10px 16px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer;text-align:left}
+.tabs button small{display:block;font:400 11px var(--mono);color:var(--muted);margin-top:2px}
+.tabs button[aria-selected="true"]{background:var(--coral);border-color:var(--coral);color:#fff}
+.tabs button[aria-selected="true"] small{color:#fff;opacity:.85}
+.calwrap{margin-top:18px;border:1.5px solid var(--line);border-radius:20px;background:var(--card);overflow:hidden}
+.calhead{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding:18px 20px;border-bottom:1px solid var(--line)}
+.calhead b{font-family:var(--display);font-size:18px}
+.calhead span{color:var(--muted);font-size:14px}
+.calscroll{max-height:440px;overflow:auto}
+.cal{width:100%;border-collapse:collapse;font-size:14px;min-width:620px}
+.cal th{position:sticky;top:0;background:var(--card);text-align:left;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:10px 14px;border-bottom:1px solid var(--line)}
+.cal td{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+.cal tr:last-child td{border-bottom:0}
+.cal td.d{font-family:var(--mono);white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--lilac)}
+.cal .chip{display:inline-block;font:500 11px var(--mono);padding:3px 8px;border-radius:999px;background:var(--bg-2);white-space:nowrap}
+.cal .chip.main{background:var(--coral);color:#fff}
+.cal .chip.yt{background:#E33;color:#fff}
+.cal .chip.done{background:#2E9E6A;color:#fff}
+.cal .kw{font-family:var(--mono);font-weight:700;color:var(--butter)}
+.cal a{color:var(--coral)}
+.cal .sub{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.calfoot{padding:14px 20px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;font-size:14px;color:var(--muted)}
+
 /* plan */
 .plan{position:relative;margin-top:44px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .plan::before{content:"";position:absolute;top:22px;left:0;right:0;height:3px;background:var(--line);border-radius:3px}
@@ -207,6 +262,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   .plan::before,.plan .bar{display:none}
   .creds{grid-template-columns:1fr 1fr}
   .navlinks{display:none}
+  .tabs{flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px}
+  .tabs button{flex:0 0 auto}
   .ask{padding:32px 22px;border-radius:24px}
   section{padding-block:64px}
 }
@@ -226,7 +283,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 <nav>
   <div class="wrap">
     <a class="logo" href="#top">akshita<span>.</span></a>
-    <div class="navlinks"><a href="#problem">The problem</a><a href="#why">Why me</a><a href="#proof">Proof</a><a href="#now">Running now</a><a href="#plan">30-day plan</a></div>
+    <div class="navlinks"><a href="#problem">The problem</a><a href="#why">Why me</a><a href="#proof">Proof</a><a href="#now">Running now</a><a href="#calendars">Calendars</a><a href="#plan">30-day plan</a></div>
     <a class="pill" href="#ask">Let's talk</a>
   </div>
 </nav>
@@ -281,8 +338,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
       <div class="stats reveal">
         <div class="stat"><div class="n" data-count="6">6</div><div class="l">brands &amp; creators served</div></div>
         <div class="stat"><div class="n" data-count="26">26</div><div class="l">live posts you can open below</div></div>
-        <div class="stat"><div class="n" data-count="26">26</div><div class="l">story &amp; carousel frames designed</div></div>
-        <div class="stat"><div class="n" data-count="90" data-prefix="~">~90</div><div class="l">content slots planned for one brand</div></div>
+        <div class="stat"><div class="n" data-count="25">25</div><div class="l">story &amp; carousel frames designed</div></div>
+        <div class="stat"><div class="n" data-count="128">128</div><div class="l">calendar slots you can browse below</div></div>
       </div>
     </div>
     <ol>
@@ -297,7 +354,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 <section id="proof">
   <div class="wrap">
     <div class="proofhead">
-      <div><div class="eyebrow reveal">03 · Proof</div><h2 class="reveal" style="margin-top:12px">Don't take my word for it.</h2></div>
+      <div><div class="eyebrow reveal">03 · Proof</div><h2 class="reveal" style="margin-top:12px">Don't take my word for it.</h2><p class="hint reveal">Tap any post to play the reel or swipe the carousel right here.</p></div>
       <div class="filters reveal" role="group" aria-label="Filter work">
         <button type="button" data-f="all" aria-pressed="true">All</button>
         <button type="button" data-f="reel" aria-pressed="false">Reels</button>
@@ -326,7 +383,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
       <article class="case reveal">
         <div><div class="meta">RETAIL · HAUZ KHAS, NEW DELHI</div><h3>Tatsat Store</h3>
           <p>Brand storytelling for a 19-year-old store built to pay artisans fairly. Strategy, pitch deck, April calendar and creatives.</p>
-          <ul><li>A 5-slide carousel written as a story arc ending in a store visit.</li><li>21 stories with stickers that turn views into DMs.</li><li>Episodic series: Gita for GenZ, Artisan Stories.</li></ul>
+          <ul><li>A 5-slide carousel written as a story arc ending in a store visit.</li><li>20 stories with stickers that turn views into DMs.</li><li>Episodic series: Gita for GenZ, Artisan Stories.</li></ul>
         </div>
         <div class="side"><div class="reel" data-client="tatsat"></div></div>
       </article>
@@ -377,6 +434,12 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
           <li>Outreach matched to each product, like the Exam planner pitched to schools and coaching centres.</li>
         </ul>
         <div class="chips"><span>Product design</span><span>AI reels</span><span>DM sales</span><span>Outreach</span></div>
+        <div class="vids" aria-label="aczy reels I made">
+          <button class="tile tall" type="button" data-video="aczy-resolutions" data-cap="“Everyone makes resolutions. Nobody makes a plan.”"><img src="assets/video/aczy-resolutions.jpg" alt="aczy reel: resolutions vs plan"><span class="play"></span><span class="k">Reel</span></button>
+          <button class="tile tall" type="button" data-video="aczy-bride-brain" data-cap="“Bride brain: 40 days to go”"><img src="assets/video/aczy-bride-brain.jpg" alt="aczy reel: bride brain"><span class="play"></span><span class="k">Reel</span></button>
+          <button class="tile tall" type="button" data-video="aczy-diwali-budget" data-cap="“Set your Diwali limit tonight.”"><img src="assets/video/aczy-diwali-budget.jpg" alt="aczy reel: Diwali budget"><span class="play"></span><span class="k">Reel</span></button>
+          <button class="tile tall" type="button" data-video="aczy-12-lpa" data-cap="“12 LPA. What lands in your account?”"><img src="assets/video/aczy-12-lpa.jpg" alt="aczy reel: 12 LPA in-hand"><span class="play"></span><span class="k">Reel</span></button>
+        </div>
         <a class="pill" href="https://www.instagram.com/aczy.in_planners/" target="_blank" rel="noopener">See @aczy.in_planners →</a>
       </article>
       <article class="proj reveal" style="--c:var(--lilac)">
@@ -395,7 +458,27 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   </div>
 </section>
 
-<section id="plan" style="background:var(--bg-2)">
+<section id="calendars" style="background:var(--bg-2)">
+  <div class="wrap">
+    <div class="eyebrow reveal">Behind the posts</div>
+    <h2 class="reveal" style="margin-top:12px">The calendars I build.</h2>
+    <p class="lead reveal" style="margin-top:16px">Every post above started as a row like these: a date, a slot, a hook and one call to action. Pick a calendar to look inside.</p>
+    <div class="tabs reveal" role="tablist" aria-label="Content calendars">
+      <button type="button" role="tab" data-cal="aczy" aria-selected="true">aczy · 30-day Instagram push<small>3 slots a day · keyword CTAs</small></button>
+      <button type="button" role="tab" data-cal="warm" aria-selected="false">Rohan · 15-day warm-up<small>Instagram + YouTube</small></button>
+      <button type="button" role="tab" data-cal="reels" aria-selected="false">Rohan · 30-day reels<small>Hooks &amp; trend remakes</small></button>
+      <button type="button" role="tab" data-cal="yt" aria-selected="false">Rohan · 30-day YouTube<small>Long-form topics</small></button>
+      <button type="button" role="tab" data-cal="comp" aria-selected="false">Rohan · competitor audit<small>17 channels reviewed</small></button>
+    </div>
+    <div class="calwrap reveal">
+      <div class="calhead"><b id="calTitle"></b><span id="calSub"></span></div>
+      <div class="calscroll"><table class="cal" id="calTable"></table></div>
+      <div class="calfoot"><span id="calNote"></span><a class="pill ghost" id="calLink" href="#" target="_blank" rel="noopener" hidden>Open the full sheet</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="plan">
   <div class="wrap">
     <div class="eyebrow reveal">04 · What I'd do for you</div>
     <h2 class="reveal" style="margin-top:12px">Your first 30 days, week by week.</h2>
@@ -443,33 +526,106 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   </div>
 </section>
 
+<div class="modal" id="viewer" hidden role="dialog" aria-modal="true" aria-label="Work viewer">
+  <div class="mbox">
+    <button class="mbtn mclose" type="button" aria-label="Close">✕</button>
+    <div class="mstage"></div>
+    <button class="mbtn mnav prev" type="button" aria-label="Previous slide" hidden>‹</button>
+    <button class="mbtn mnav next" type="button" aria-label="Next slide" hidden>›</button>
+    <div class="dots"></div>
+    <div class="mbar"><span class="mcap"></span><a class="mext" href="#" target="_blank" rel="noopener" hidden>Open on Instagram ↗</a></div>
+  </div>
+</div>
+
 <footer>
   <div class="wrap"><span>© 2026 Akshita Jain. Client creatives belong to their brands. Please don't copy this page.</span><span>Good Life. Good Vibe. · Delhi</span></div>
 </footer>
 
 <script>
 (function(){
-  var IG='https://www.instagram.com/p/', TS='https://canva.link/vp89adwwdd75fof', TST='https://canva.link/wk8gq287njzrxmc';
-  var W='assets/img/work/';
+  var IG='https://www.instagram.com/p/', W='assets/img/work/', T='assets/img/tatsat/';
+  var pad=function(n){return (n<10?'0':'')+n};
+  var GAL={
+    'tatsat-carousel':[1,2,3,4,5].map(function(i){return T+'carousel-'+pad(i)+'.jpg'}),
+    'tatsat-stories':Array.from({length:20},function(_,i){return T+'story-'+pad(i+2)+'.jpg'})
+  };
   var data={
-    snapto:[['snapto-series','DTR9MJzjajP','carousel','Series'],['snapto-carousel','DPVrddikovp','carousel','Carousel'],['snapto-post','DO5Nwt9DmbS','carousel','Post'],['snapto-reel','DQwFp5kEpWS','reel','Reel · edited']],
+    snapto:[['snapto-series','ig:DTR9MJzjajP','carousel','Series'],['snapto-carousel','ig:DPVrddikovp','carousel','Carousel'],['snapto-post','ig:DO5Nwt9DmbS','carousel','Post'],['snapto-reel','ig:DQwFp5kEpWS','reel','Reel · edited']],
     noor:[['DeIRs8FNcp7','reel'],['DeCfXEwTc9i','reel'],['Dd9f1cHTsSZ','carousel','Post'],['Dd_wCfHNvpq','reel'],['Dd_5CVuTGi0','reel'],['DeQp3kdBmbd','reel'],['Dd9EtGZzndZ','reel'],['Dd9l4b8EzRb','carousel','Carousel'],['Dd9U3OezxGF','reel'],['Dd__3G3zxC0','reel'],['DeCdBX8zrET','reel'],['Dd__zPJE6AK','carousel','Carousel'],['DeCWeKWk5Td','carousel','Carousel'],['Dd9LxD3TK7q','reel'],['Dd9RggPzZSb','reel'],['Dd9iucYTBa4','reel'],['Dd_9VbXzkBM','reel'],['Dd_-V_MzTz8','reel'],['Dd9bDzuTCXw','reel']],
-    tatsat:[['tatsat-1',TS,'carousel','Carousel 1/5'],['tatsat-2',TS,'carousel','Carousel 2/5'],['tatsat-4',TS,'carousel','Carousel 4/5'],['tatsat-story-1',TST,'story','Story'],['tatsat-story-2',TST,'story','Story'],['tatsat-story-3',TST,'story','Story'],['tatsat-story-4',TST,'story','Story']],
-    casper:[['casper-reel','Da2vrVFIIoa','reel','Reel · shot'],['casper-group',null,'reel','Event']]
+    tatsat:[['tatsat-1','gal:tatsat-carousel:0','carousel','Carousel · 5 slides'],['tatsat-2','gal:tatsat-carousel:1','carousel','Slide 2'],['tatsat-4','gal:tatsat-carousel:3','carousel','Slide 4'],['tatsat-story-1','gal:tatsat-stories:0','story','Stories · 20'],['tatsat-story-2','gal:tatsat-stories:1','story','Story'],['tatsat-story-3','gal:tatsat-stories:7','story','Story'],['tatsat-story-4','gal:tatsat-stories:11','story','Story']],
+    casper:[['casper-reel','ig:Da2vrVFIIoa','reel','Reel · shot'],['casper-group',null,'reel','Event']]
   };
   document.querySelectorAll('.reel').forEach(function(box){
     var c=box.dataset.client;
     data[c].forEach(function(r){
-      var file,href,cat,label;
-      if(c==='noor'){file='noor-'+r[0].toLowerCase().replace(/_/g,'-');href=IG+r[0]+'/';cat=r[1];label=r[2]||'Reel';}
-      else{file=r[0];href=r[1]?(r[1].indexOf('http')===0?r[1]:IG+r[1]+'/'):null;cat=r[2];label=r[3];}
-      var el=document.createElement(href?'a':'div');
+      var file,src,cat,label;
+      if(c==='noor'){file='noor-'+r[0].toLowerCase().replace(/_/g,'-');src='ig:'+r[0];cat=r[1];label=r[2]||'Reel';}
+      else{file=r[0];src=r[1];cat=r[2];label=r[3];}
+      var el=document.createElement(src?'button':'div');
+      if(src){el.type='button';el.dataset.src=src;el.setAttribute('aria-label','Open '+label);}
       el.className='tile'+(cat==='story'?' tall':'');el.dataset.cat=cat;
-      if(href){el.href=href;el.target='_blank';el.rel='noopener';}
-      el.innerHTML='<img loading="lazy" src="'+W+file+'.jpg" alt="'+label+' for '+c+'"><span class="k">'+label+'</span>';
+      el.innerHTML='<img loading="lazy" src="'+W+file+'.jpg" alt="'+label+'">'+(src?'<span class="play'+(cat==='reel'?'':' stack')+'"></span>':'')+'<span class="k">'+label+'</span>';
       box.appendChild(el);
     });
   });
+
+  // viewer
+  var modal=document.getElementById('viewer'),stage=modal.querySelector('.mstage'),cap=modal.querySelector('.mcap'),dots=modal.querySelector('.dots'),
+      prev=modal.querySelector('.prev'),next=modal.querySelector('.next'),ext=modal.querySelector('.mext'),last=null,gal=null,gi=0;
+  function show(){modal.hidden=false;requestAnimationFrame(function(){modal.classList.add('open')});document.body.style.overflow='hidden';modal.querySelector('.mclose').focus();}
+  function hide(){modal.classList.remove('open');setTimeout(function(){modal.hidden=true;stage.innerHTML='';},250);document.body.style.overflow='';if(last)last.focus();}
+  function drawGal(){stage.innerHTML='<img src="'+GAL[gal][gi]+'" alt="Slide '+(gi+1)+'">';prev.hidden=next.hidden=GAL[gal].length<2;
+    dots.innerHTML=GAL[gal].map(function(_,i){return '<i class="'+(i===gi?'on':'')+'"></i>'}).join('');cap.textContent=(gi+1)+' / '+GAL[gal].length;}
+  function open(src,label,trigger){
+    last=trigger;gal=null;prev.hidden=next.hidden=true;dots.innerHTML='';ext.hidden=true;
+    var p=src.split(':');
+    if(p[0]==='ig'){stage.innerHTML='<iframe src="https://www.instagram.com/p/'+p[1]+'/embed/captioned/" title="Instagram post" loading="lazy" allowfullscreen></iframe>';
+      cap.textContent=label||'';ext.href=IG+p[1]+'/';ext.hidden=false;}
+    else if(p[0]==='gal'){gal=p[1];gi=+p[2]||0;drawGal();}
+    else if(p[0]==='vid'){stage.innerHTML='<video src="assets/video/'+p[1]+'.mp4" poster="assets/video/'+p[1]+'.jpg" controls autoplay playsinline controlslist="nodownload"></video>';cap.textContent=label||'';}
+    show();
+  }
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('[data-src],[data-video]');if(!t)return;
+    if(t.dataset.video)open('vid:'+t.dataset.video,t.dataset.cap,t);else open(t.dataset.src,t.querySelector('.k')&&t.querySelector('.k').textContent,t);
+  });
+  prev.addEventListener('click',function(){gi=(gi-1+GAL[gal].length)%GAL[gal].length;drawGal()});
+  next.addEventListener('click',function(){gi=(gi+1)%GAL[gal].length;drawGal()});
+  modal.querySelector('.mclose').addEventListener('click',hide);
+  modal.addEventListener('click',function(e){if(e.target===modal)hide()});
+  document.addEventListener('keydown',function(e){if(modal.hidden)return;if(e.key==='Escape')hide();if(gal&&e.key==='ArrowRight')next.click();if(gal&&e.key==='ArrowLeft')prev.click();});
+  var sx=null;stage.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+  stage.addEventListener('touchend',function(e){if(!gal||sx===null)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)(dx<0?next:prev).click();sx=null});
+
+  // calendars
+  var CAL=null,SHEET='https://docs.google.com/spreadsheets/d/1uLlhfmok48dHFsbZA5JGXuPETlb097O2HWRCwiC8HSM/edit';
+  var META={
+    aczy:['aczy · 30-day Instagram push','12 Oct – 10 Nov 2026 · 39 rows shown','Each slot has an on-screen hook, the planner it sells and a comment keyword that triggers a DM.',null],
+    warm:["Rohan Gulati · 15-day warm-up",'Jan 2026 · Instagram + YouTube','Classroom clips to warm up the audience before the main push.',SHEET],
+    reels:["Rohan Gulati · 30-day reels",'16 Jan – 14 Feb 2026','Original hooks mixed with trend remakes, each with a reference link.',SHEET],
+    yt:["Rohan Gulati · 30-day YouTube",'16 Jan – 14 Feb 2026','Long-form tutorials, each with a backup topic.',SHEET],
+    comp:["Rohan Gulati · competitor audit",'17 channels reviewed','What each channel does well or badly, used to find gaps for Rohan.',SHEET]
+  };
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function stChip(s){if(!s)return '';var c=/done/i.test(s)?'done':'';return '<span class="chip '+c+'">'+esc(s)+'</span>'}
+  function drawCal(k){
+    var m=META[k],rows=CAL[k],h='';
+    document.getElementById('calTitle').textContent=m[0];document.getElementById('calSub').textContent=m[1];document.getElementById('calNote').textContent=m[2];
+    var L=document.getElementById('calLink');L.hidden=!m[3];if(m[3])L.href=m[3];
+    if(k==='aczy'){h='<tr><th>Date</th><th>Time</th><th>Slot</th><th>On-screen hook</th><th>Planner</th><th>Comment CTA</th></tr>'+rows.map(function(r){
+      return '<tr><td class="d">'+esc(r[0])+'</td><td class="d">'+esc(r[1])+'</td><td><span class="chip'+(r[2]==='Main post'?' main':'')+'">'+esc(r[2])+'</span></td><td>'+esc(r[3])+'</td><td>'+esc(r[4])+'</td><td class="kw">'+esc(r[5])+'</td></tr>'}).join('');}
+    else if(k==='comp'){h='<tr><th>Channel</th><th>What I noted</th></tr>'+rows.map(function(r){return '<tr><td><b>'+esc(r[0])+'</b></td><td>'+esc(r[1]||'Reviewed for topics and formats')+'</td></tr>'}).join('');}
+    else{h='<tr><th>Date</th><th>Format</th><th>Idea</th><th>Status / notes</th></tr>'+rows.map(function(r){
+      var idea=esc(r[3])+(r[4]?' <a href="'+esc(r[4])+'" target="_blank" rel="noopener">reference ↗</a>':'');
+      var note=(k==='warm')?stChip(r[5]):(r[5]?'<span class="sub">'+esc(r[5])+'</span>':'');
+      return '<tr><td class="d">'+esc(r[0])+'</td><td><span class="chip'+(r[2]==='YouTube'?' yt':'')+'">'+esc(r[2])+'</span></td><td>'+idea+'</td><td>'+note+'</td></tr>'}).join('');}
+    document.getElementById('calTable').innerHTML=h;
+    document.querySelector('.calscroll').scrollTop=0;
+  }
+  var tabs=document.querySelectorAll('[data-cal]');
+  tabs.forEach(function(b){b.addEventListener('click',function(){tabs.forEach(function(x){x.setAttribute('aria-selected',x===b?'true':'false')});if(CAL)drawCal(b.dataset.cal)})});
+  fetch('assets/calendars.json').then(function(r){return r.json()}).then(function(j){CAL=j;drawCal('aczy')}).catch(function(){document.getElementById('calNote').textContent='Calendar could not load. Refresh the page to try again.'});
+
   // filters
   var btns=document.querySelectorAll('.filters button');
   btns.forEach(function(b){b.addEventListener('click',function(){
