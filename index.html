@@ -450,7 +450,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
         <span class="status"><i></i>Ongoing · local business</span>
         <h3>Jain Ki Dukaan</h3>
         <div class="role">Website · content · social</div>
-        <p>An authorized Star Shine pump dealer in Delhi, running since 2011, whose only marketing was a printed visiting card. I took it online with a full website, built from scratch.</p>
+        <p>An authorized Star Shine pump dealer in Delhi, running since 2011, whose only marketing was this printed visiting card. I took it online with a full website, built from scratch.</p>
         <ul>
           <li>Built in Next.js with scroll animations and a mobile-first layout, plus a WhatsApp button on every screen.</li>
           <li>A 33-product catalogue in 8 categories with MRPs, so buyers check prices before they call.</li>
@@ -462,7 +462,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
           <button class="tile" type="button" data-src="gal:jkd:1"><img src="assets/img/jkd/t-site-hero.jpg" alt="After: website home page"><span class="play stack"></span><span class="k">After · home</span></button>
           <button class="tile" type="button" data-src="gal:jkd:2"><img src="assets/img/jkd/t-site-range.jpg" alt="Website product range"><span class="play stack"></span><span class="k">Products</span></button>
           <button class="tile" type="button" data-src="gal:jkd:3"><img src="assets/img/jkd/t-site-services.jpg" alt="Website services"><span class="play stack"></span><span class="k">Services</span></button>
-          <button class="tile" type="button" data-src="gal:jkd:6"><img src="assets/img/jkd/t-site-mobile.jpg" alt="Website on a phone"><span class="play stack"></span><span class="k">On mobile</span></button>
+          <button class="tile" type="button" data-src="gal:jkd:8"><img src="assets/img/jkd/t-site-mobile.jpg" alt="Website on a phone"><span class="play stack"></span><span class="k">On mobile</span></button>
         </div>
       </article>
     </div>
@@ -558,7 +558,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   var pad=function(n){return (n<10?'0':'')+n};
   var GAL={
     'tatsat-carousel':[1,2,3,4,5].map(function(i){return T+'carousel-'+pad(i)+'.jpg'}),
-    'jkd':['before-card','site-hero','site-range','site-services','site-locations','site-faq','site-mobile'].map(function(n){return 'assets/img/jkd/'+n+'.jpg'}),
+    'jkd':['before-card','site-hero','site-range','site-services','site-about','site-catalogue','site-faq','site-contact','site-mobile'].map(function(n){return 'assets/img/jkd/'+n+'.jpg'}),
     'tatsat-stories':Array.from({length:20},function(_,i){return T+'story-'+pad(i+2)+'.jpg'})
   };
   var data={
@@ -586,7 +586,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
       prev=modal.querySelector('.prev'),next=modal.querySelector('.next'),ext=modal.querySelector('.mext'),last=null,gal=null,gi=0;
   function show(){modal.hidden=false;requestAnimationFrame(function(){modal.classList.add('open')});document.body.style.overflow='hidden';modal.querySelector('.mclose').focus();}
   function hide(){modal.classList.remove('open');setTimeout(function(){modal.hidden=true;stage.innerHTML='';},250);document.body.style.overflow='';if(last)last.focus();}
-  function drawGal(){modal.querySelector('.mbox').classList.toggle('wide',gal==='jkd'&&gi>0&&gi<6);stage.innerHTML='<img src="'+GAL[gal][gi]+'" alt="Slide '+(gi+1)+'">';prev.hidden=next.hidden=GAL[gal].length<2;
+  function drawGal(){modal.querySelector('.mbox').classList.toggle('wide',gal==='jkd'&&gi<8);stage.innerHTML='<img src="'+GAL[gal][gi]+'" alt="Slide '+(gi+1)+'">';prev.hidden=next.hidden=GAL[gal].length<2;
     dots.innerHTML=GAL[gal].map(function(_,i){return '<i class="'+(i===gi?'on':'')+'"></i>'}).join('');cap.textContent=(gi+1)+' / '+GAL[gal].length;}
   function open(src,label,trigger){
     last=trigger;gal=null;modal.querySelector('.mbox').classList.remove('wide');prev.hidden=next.hidden=true;dots.innerHTML='';ext.hidden=true;
